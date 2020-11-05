@@ -7,7 +7,7 @@ jobs:
       os: osx
       osx_image: xcode11.2
       language: objective-c
-      script: "./tool/travis_ios_script.sh"
+      script: "cd ios && pod update && dg deploy && cd .."
       env: FLUTTER_VERSION=stable
 
     - name: Android tests, stable channel
@@ -20,7 +20,7 @@ jobs:
           - android-28
           - build-tools-29.0.2
           - android-29
-      script: "./tool/travis_android_script.sh"
+      script: "cd android && dg deploy && cd .."
       env: FLUTTER_VERSION=stable
 
     - name: Flutter tests, stable channel
