@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:show_off/route/app_route.dart';
+import 'package:show_off/utils/app_size.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -9,6 +10,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  AppSize _appSize = AppSize();
   @override
   void initState() {
     super.initState();
@@ -26,6 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    _appSize.init(context);
     return Scaffold(
       body: Container(
         child: Center(

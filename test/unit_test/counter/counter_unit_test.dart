@@ -18,9 +18,12 @@ void main(){
 
   test('decrement in counter', (){
     final counter = CounterStore();
-
+    counter.increment();
+    counter.increment();
+    counter.increment();
+    counter.increment();
     counter.decrement();
 
-    expect(counter.counter, -1);
+    expect(counter.counter, 3);
   });
 }
