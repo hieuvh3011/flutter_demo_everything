@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:show_off/screens/account/account_screen.dart';
 import 'package:show_off/screens/home/home_screen.dart';
-import 'package:show_off/screens/settings/SettingScreen.dart';
+import 'package:show_off/screens/settings/setting_screen.dart';
 
 class BottomTabs extends StatefulWidget {
   @override

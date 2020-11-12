@@ -3,8 +3,8 @@ import 'package:show_off/route/bottom_tabs.dart';
 import 'package:show_off/screens/account/account_screen.dart';
 import 'package:show_off/screens/home/home_screen.dart';
 import 'package:show_off/screens/login/login_screen.dart';
-import 'package:show_off/screens/register/RegisterScreen.dart';
-import 'package:show_off/screens/settings/SettingScreen.dart';
+import 'package:show_off/screens/register/register_screen.dart';
+import 'package:show_off/screens/settings/setting_screen.dart';
 import 'package:show_off/screens/splash/splash_screen.dart';
 
 class AppRoute {

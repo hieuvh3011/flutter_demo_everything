@@ -59,17 +59,6 @@ mixin _$LoginStore on LoginStoreBase, Store {
       ActionController(name: 'LoginStoreBase');
 
   @override
-  dynamic showLoading() {
-    final _$actionInfo = _$LoginStoreBaseActionController.startAction(
-        name: 'LoginStoreBase.showLoading');
-    try {
-      return super.showLoading();
-    } finally {
-      _$LoginStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   dynamic hideLoading() {
     final _$actionInfo = _$LoginStoreBaseActionController.startAction(
         name: 'LoginStoreBase.hideLoading');
@@ -125,7 +114,7 @@ mixin _$LoginStore on LoginStoreBase, Store {
   }
 
   @override
-  dynamic onPressedLoginButton(BuildContext context) {
+  void onPressedLoginButton(BuildContext context) {
     final _$actionInfo = _$LoginStoreBaseActionController.startAction(
         name: 'LoginStoreBase.onPressedLoginButton');
     try {
