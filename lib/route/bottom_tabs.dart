@@ -30,6 +30,7 @@ class _BottomTabsState extends State<BottomTabs> {
         children: _widgetOptions,
       ),
       bottomNavigationBar: BottomNavigationBar(
+        elevation: 2.0,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

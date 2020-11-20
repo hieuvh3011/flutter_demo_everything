@@ -3,8 +3,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:show_off/stores/counter_store/counter_store.dart';
 
-int counter = 1;
-
 class AccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -33,7 +31,7 @@ class AccountScreen extends StatelessWidget {
                 _button(context, _counterStore.increment, '+'),
                 _button(context, _counterStore.decrement, '-')
               ],
-            )
+            ),
           ],
         ),
       ),

@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:show_off/screens/common/loading.dart';
 import 'package:show_off/stores/login_store/login_store.dart';
-import 'package:show_off/utils/app_size.dart';
 
 class LoginScreen extends StatelessWidget {
   final LoginStore _loginStore = LoginStore();
-  final AppSize _appSize = AppSize.getInstance();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,7 +12,7 @@ class LoginScreen extends StatelessWidget {
           FocusScope.of(context).requestFocus(new FocusNode());
         },
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: _appSize.scale(20.0)),
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -61,10 +58,10 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: _appSize.scale(40.0),
+                height: 40.0,
               ),
               ButtonTheme(
-                height: _appSize.scale(50.0),
+                height: 50.0,
                 child: RaisedButton(
                   onPressed: () {
                     _loginStore.onPressedLoginButton(context);

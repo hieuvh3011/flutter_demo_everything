@@ -1,9 +1,6 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:show_off/route/app_route.dart';
 import 'package:show_off/stores/splash_store/splash_store.dart';
-import 'package:show_off/utils/app_size.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -27,7 +24,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    _splashStore.initSize(context);
     return Scaffold(
       body: Container(
         child: Center(
