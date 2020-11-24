@@ -22,13 +22,6 @@ abstract class LoginStoreBase with Store {
   bool isLoading = false;
 
   @action
-  showLoading() {
-    if (isLoading == false) {
-      isLoading = true;
-    }
-  }
-
-  @action
   hideLoading() {
     if (isLoading == true) {
       isLoading = false;
@@ -72,23 +65,22 @@ abstract class LoginStoreBase with Store {
   }
 
   @action
-  onPressedLoginButton(BuildContext context) {
+  void onPressedLoginButton(BuildContext context) {
     try {
       String email = emailController.text;
       String password = passwordController.text;
-      showLoading();
-      EasyLoading.show(status: 'loading...');
       print('username = ' + email);
       print('password = ' + password);
-      // if (validatePassword(password) == null && validateEmail(email) == null) {
-      //   Navigator.of(context).pushReplacementNamed(AppRoute.BOTTOM_TAB);
-      // } else {
-      //   emailFormKey.currentState.validate();
-      //   passwordFormKey.currentState.validate();
-      // }
-      Future.delayed(Duration(seconds: 2), () {
-        EasyLoading.dismiss();
-      });
+      if (validatePassword(password) == null && validateEmail(email) == null) {
+        EasyLoading.show(status: 'loading...');
+        Navigator.of(context).pushReplacementNamed(AppRoute.BOTTOM_TAB);
+        Future.delayed(Duration(seconds: 2), () {
+          EasyLoading.dismiss();
+        });
+      } else {
+        emailFormKey.currentState.validate();
+        passwordFormKey.currentState.validate();
+      }
     } catch (error) {
       print('error onPressedLoginButton = ' + error);
       debugPrintStack();

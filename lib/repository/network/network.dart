@@ -7,9 +7,9 @@ class Network {
 
   static Future fetchData([int page, int limit]) async {
     var response;
-    if (page == null && limit == null){
+    if (page == null && limit == null) {
       response = await http.get(url);
-    }else {
+    } else {
       Map<String, dynamic> params = {
         'page': page, 'limit': limit
       };
@@ -21,5 +21,4 @@ class Network {
     print('response = ' + response.body);
     return response.body;
   }
-
 }

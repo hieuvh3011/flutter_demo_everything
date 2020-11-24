@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
 import 'package:show_off/stores/counter_store/counter_store.dart';
 
-int counter = 1;
-
 class AccountScreen extends StatelessWidget {
-  onPress() {}
-  final _counterStore = CounterStore();
   @override
   Widget build(BuildContext context) {
+    print('rebuild account_screen');
+    CounterStore _counterStore = Provider.of<CounterStore>(context);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -32,7 +31,7 @@ class AccountScreen extends StatelessWidget {
                 _button(context, _counterStore.increment, '+'),
                 _button(context, _counterStore.decrement, '-')
               ],
-            )
+            ),
           ],
         ),
       ),

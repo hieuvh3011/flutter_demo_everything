@@ -13,8 +13,4 @@ abstract class AppStoreBase with Store {
   double guidelineBaseWidth = 350;
   double guidelineBaseHeight = 680;
 
-  @action
-  double getScreenWidth(BuildContext context){
-    return MediaQuery.of(context).size.width;
-  }
 }

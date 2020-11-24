@@ -1,8 +1,6 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:show_off/route/app_route.dart';
-import 'package:show_off/utils/app_size.dart';
+import 'package:show_off/stores/splash_store/splash_store.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -10,25 +8,22 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  AppSize _appSize = AppSize();
+  SplashStore _splashStore = SplashStore();
   @override
   void initState() {
     super.initState();
-    _startTime();
+    _splashStore.startTimer(context);
   }
 
-  _startTime() async {
-    var _duration = new Duration(seconds: 2);
-    return new Timer(_duration, _goToLogin);
-  }
-
-  void _goToLogin() {
-    Navigator.of(context).pushReplacementNamed(AppRoute.LOGIN_SCREEN);
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _splashStore.cancelTimer();
   }
 
   @override
   Widget build(BuildContext context) {
-    _appSize.init(context);
     return Scaffold(
       body: Container(
         child: Center(
