@@ -1,6 +1,6 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:show_off/model/user.dart';
 import 'package:show_off/repository/database/local_database.dart';
@@ -23,7 +23,7 @@ abstract class _HomeStore with Store {
   LocalDatabase localDatabase = LocalDatabase();
 
   @action
-  Future<List<User>> getListUser() async {
+  Future<List<User>> getListUser([BuildContext context]) async {
     List<User> result = List<User>();
     try{
       if (await localDatabase.isTableUserEmpty()){
@@ -37,6 +37,7 @@ abstract class _HomeStore with Store {
     }catch(exception){
       print('getListUser exception = '+exception.toString());
       debugPrintStack();
+      _showDialogError(context, exception.toString());
     }
     return result;
   }
@@ -46,5 +47,32 @@ abstract class _HomeStore with Store {
     if (await localDatabase.isTableUserEmpty()){
       await localDatabase.insertListUser(listUsers);
     }
+  }
+
+  Future<void> _showDialogError(BuildContext context, String error) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Error'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(error),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:photo_view/photo_view.dart';
 
 class DetailsScreen extends StatelessWidget {
   @override
@@ -7,25 +8,9 @@ class DetailsScreen extends StatelessWidget {
       tag: 'image_of_crush',
       child: Container(
         alignment: Alignment.center,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('lib/res/images/crush.jpg'),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Container(
-          alignment: Alignment.topLeft,
-          padding: EdgeInsets.symmetric(vertical: 30.0, horizontal: 10.0),
-          child: GestureDetector(
-            onTap: (){
-              Navigator.of(context).pop();
-            },
-            child: Icon(
-              Icons.arrow_back,
-              color: Colors.black,
-              size: 30.0,
-            ),
-          ),
+        child: PhotoView(
+          minScale: PhotoViewComputedScale.contained,
+          imageProvider: AssetImage('lib/res/images/crush.jpg'),
         ),
       ),
     );

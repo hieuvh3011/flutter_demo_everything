@@ -57,8 +57,8 @@ mixin _$HomeStore on _HomeStore, Store {
   final _$getListUserAsyncAction = AsyncAction('_HomeStore.getListUser');
 
   @override
-  Future<List<User>> getListUser() {
-    return _$getListUserAsyncAction.run(() => super.getListUser());
+  Future<List<User>> getListUser([BuildContext context]) {
+    return _$getListUserAsyncAction.run(() => super.getListUser(context));
   }
 
   final _$saveListUserToLocalDatabaseAsyncAction =

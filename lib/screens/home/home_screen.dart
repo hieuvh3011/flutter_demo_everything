@@ -17,46 +17,9 @@ class _HomeScreenState extends State<HomeScreen> {
   var listUsers;
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    try {
-      _homeStore = Provider.of<HomeStore>(context);
-      listUsers = _homeStore.getListUser();
-    } catch (error) {
-      _showDialogError(error);
-    }
-  }
-
-  Future<void> _showDialogError(String error) async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Error'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text(error),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: Text('OK'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
+    _homeStore = Provider.of<HomeStore>(context);
+    listUsers = _homeStore.getListUser(context);
     return Scaffold(
         appBar: AppBar(
           title: Text('Home Screen'),

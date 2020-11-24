@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:photo_view/photo_view.dart';
 
 class ZoomScreen extends StatefulWidget {
   @override
@@ -29,14 +30,13 @@ class _ZoomScreenState extends State<ZoomScreen>
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      child: InteractiveViewer(
-        constrained: true,
-        child: Image(
-          alignment: Alignment.center,
-          fit: BoxFit.contain,
-          image: AssetImage('lib/res/images/min.jpg'),
-        ),
-      ),
+      child: PhotoView(
+        imageProvider: AssetImage('lib/res/images/min.jpg'),
+        minScale: PhotoViewComputedScale.contained,
+        maxScale: PhotoViewComputedScale.covered * 3,
+        initialScale: PhotoViewComputedScale.contained,
+
+      )
     );
   }
 }

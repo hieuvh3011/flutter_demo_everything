@@ -28,10 +28,11 @@ class ItemUser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RaisedButton(
+      key: Key('item $id'),
       onPressed: onPress,
       color: Colors.white,
       child: Container(
-        width: MediaQuery.of(context).size.width,
+        alignment: Alignment.center,
         height: itemHeight + 20,
         padding: EdgeInsets.all(10.0),
         decoration: BoxDecoration(
