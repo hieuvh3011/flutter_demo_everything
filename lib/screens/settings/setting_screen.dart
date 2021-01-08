@@ -12,13 +12,11 @@ class SettingScreen extends StatefulWidget {
 class _SettingScreenState extends State<SettingScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
   }
 
@@ -28,6 +26,10 @@ class _SettingScreenState extends State<SettingScreen> {
 
   void goToZoom() {
     Navigator.of(context).pushNamed(AppRoute.ZOOM_SCREEN);
+  }
+
+  void goToCamera() {
+    print("go to camera");
   }
 
   @override
@@ -68,7 +70,9 @@ class _SettingScreenState extends State<SettingScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 20.0,),
+              SizedBox(
+                height: 20.0,
+              ),
               GestureDetector(
                 onTap: () {
                   goToZoom();
@@ -82,6 +86,26 @@ class _SettingScreenState extends State<SettingScreen> {
                       fit: BoxFit.cover,
                       image: AssetImage('lib/res/images/min.jpg'),
                     ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              SizedBox(
+                width: 150,
+                height: 50,
+                child: RaisedButton(
+                  onPressed: () {
+                    goToCamera();
+                  },
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  color: Colors.lightBlue,
+                  child: Text(
+                    "Go to camera",
+                    style: TextStyle(color: Colors.white),
                   ),
                 ),
               ),

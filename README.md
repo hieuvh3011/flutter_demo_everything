@@ -87,9 +87,9 @@ From my experience, I will use the structure below. If you guys find anything un
   - `route`: manage route (navigation) inside of application
   - `utils`: folder to store any kind of helper that you have, such as Themes, Colors, Images
    Directory, etc.
-  - `view_model`: this is a state management part in this application. I've separated the state
+  - `store`: this is a state management part in this application. I've separated the state
    and UI of the app into two separate layers. This layer use to manage state in app.
-  - `widget`: this is a UI layer. All files in here have only 1 mission: display UI of app.
+  - `screen`: this is a UI layer. All files in here have only 1 mission: display UI of app.
 - `main.dart`: entry point of your application as per Flutter standards.
 
 
