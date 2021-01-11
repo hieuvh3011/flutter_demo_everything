@@ -29,7 +29,7 @@ class _SettingScreenState extends State<SettingScreen> {
   }
 
   void goToCamera() {
-    print("go to camera");
+    Navigator.of(context).pushNamed(AppRoute.TAKE_PICTURE_SCREEN);
   }
 
   @override
