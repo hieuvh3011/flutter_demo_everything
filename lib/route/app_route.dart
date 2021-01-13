@@ -7,6 +7,7 @@ import 'package:show_off/screens/login/login_screen.dart';
 import 'package:show_off/screens/register/register_screen.dart';
 import 'package:show_off/screens/settings/setting_screen.dart';
 import 'package:show_off/screens/splash/splash_screen.dart';
+import 'package:show_off/screens/take_picture/take_picture_screen.dart';
 import 'package:show_off/screens/zoom/zoom_screen.dart';
 
 class AppRoute {
@@ -20,6 +21,7 @@ class AppRoute {
   static const BOTTOM_TAB = ROOT + 'bottom_tab';
   static const DETAILS_SCREEN = ROOT + 'details_screen';
   static const ZOOM_SCREEN = ROOT + 'zoom_screen';
+  static const TAKE_PICTURE_SCREEN = ROOT + 'take_picture';
 
   static final routes = <String, WidgetBuilder>{
     ROOT: (BuildContext context) => SplashScreen(),
@@ -31,6 +33,7 @@ class AppRoute {
     DETAILS_SCREEN: (BuildContext context) => DetailsScreen(),
     ZOOM_SCREEN: (BuildContext context) => ZoomScreen(),
     BOTTOM_TAB: (BuildContext context) => BottomTabs(),
+    TAKE_PICTURE_SCREEN: (BuildContext context) => TakePictureScreen(),
   };
 
   static void setHomeScreenAsRoot(context) {

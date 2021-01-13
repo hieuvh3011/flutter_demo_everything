@@ -1,8 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:show_off/repository/network/network.dart';
 import 'package:show_off/model/user.dart';
 import 'package:show_off/screens/home/item_user.dart';
 import 'package:show_off/stores/home_store/home_store.dart';
