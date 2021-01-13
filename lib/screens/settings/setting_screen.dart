@@ -32,6 +32,10 @@ class _SettingScreenState extends State<SettingScreen> {
     Navigator.of(context).pushNamed(AppRoute.TAKE_PICTURE_SCREEN);
   }
 
+  void goToMap() {
+    Navigator.of(context).pushNamed(AppRoute.MAP_SCREEN);
+  }
+
   @override
   Widget build(BuildContext context) {
     print('rebuild setting_screen');
@@ -105,6 +109,26 @@ class _SettingScreenState extends State<SettingScreen> {
                   color: Colors.lightBlue,
                   child: Text(
                     "Go to camera",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              SizedBox(
+                width: 150,
+                height: 50,
+                child: RaisedButton(
+                  onPressed: () {
+                    goToMap();
+                  },
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  color: Colors.lightBlue,
+                  child: Text(
+                    "Go to map",
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
