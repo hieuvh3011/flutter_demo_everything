@@ -44,6 +44,8 @@ dependencies:
   path_provider: ^1.6.27
   path: ^1.7.0
   google_maps_flutter: ^1.0.10
+  google_sign_in: ^4.5.9
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

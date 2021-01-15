@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mobx/mobx.dart';
 import 'package:show_off/business_logic/validator.dart';
 import 'package:show_off/route/app_route.dart';
@@ -11,7 +12,11 @@ class LoginStore = LoginStoreBase with _$LoginStore;
 abstract class LoginStoreBase with Store {
   final GlobalKey<FormState> emailFormKey = GlobalKey<FormState>();
   final GlobalKey<FormState> passwordFormKey = GlobalKey<FormState>();
-
+  GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: <String>[
+      'email',
+    ],
+  );
   @observable
   TextEditingController emailController = TextEditingController();
 
@@ -84,6 +89,31 @@ abstract class LoginStoreBase with Store {
     } catch (error) {
       print('error onPressedLoginButton = ' + error);
       debugPrintStack();
+    }
+  }
+
+  void onPressLoginWithGoogle() {
+    try {
+      _googleSignIn.isSignedIn().then((value) => {
+            if (value == true)
+              {
+                _googleSignIn.signOut().then((value) => _googleSignIn
+                    .signIn()
+                    .then(
+                        (value) => print('Login success: ' + value.toString())))
+              }
+            else
+              {
+                _googleSignIn.signIn().then(
+                    (value) => print('Login success: ' + value.toString()))
+              }
+          });
+
+      // _googleSignIn
+      //     .signIn()
+      //     .then((value) => print('Login success: ' + value.toString()));
+    } catch (error) {
+      print("Login failed: " + error.toString());
     }
   }
 }

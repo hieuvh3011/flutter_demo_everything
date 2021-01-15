@@ -3,6 +3,7 @@ import 'package:show_off/stores/login_store/login_store.dart';
 
 class LoginScreen extends StatelessWidget {
   final LoginStore _loginStore = LoginStore();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,6 +74,30 @@ class LoginScreen extends StatelessWidget {
                   child: const Center(
                     child: Text(
                       'Login',
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18.0,
+                          color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 40.0,
+              ),
+              ButtonTheme(
+                height: 50.0,
+                child: RaisedButton(
+                  onPressed: () {
+                    _loginStore.onPressLoginWithGoogle();
+                  },
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  color: Colors.redAccent[100],
+                  child: const Center(
+                    child: Text(
+                      'Login with Google',
                       style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18.0,
