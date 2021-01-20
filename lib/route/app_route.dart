@@ -8,6 +8,7 @@ import 'package:show_off/screens/map/google_map.dart';
 import 'package:show_off/screens/register/register_screen.dart';
 import 'package:show_off/screens/settings/setting_screen.dart';
 import 'package:show_off/screens/splash/splash_screen.dart';
+import 'package:show_off/screens/tab/tab_container.dart';
 import 'package:show_off/screens/take_picture/take_picture_screen.dart';
 import 'package:show_off/screens/zoom/zoom_screen.dart';
 
@@ -24,6 +25,7 @@ class AppRoute {
   static const ZOOM_SCREEN = ROOT + 'zoom_screen';
   static const TAKE_PICTURE_SCREEN = ROOT + 'take_picture';
   static const MAP_SCREEN = ROOT + 'google_map';
+  static const TAB_CONTAINER = ROOT + 'tab_container';
 
   static final routes = <String, WidgetBuilder>{
     ROOT: (BuildContext context) => SplashScreen(),
@@ -37,6 +39,7 @@ class AppRoute {
     BOTTOM_TAB: (BuildContext context) => BottomTabs(),
     TAKE_PICTURE_SCREEN: (BuildContext context) => TakePictureScreen(),
     MAP_SCREEN: (BuildContext context) => GoogleMapScreen(),
+    TAB_CONTAINER: (BuildContext context) => TabContainer(),
   };
 
   static void setHomeScreenAsRoot(context) {

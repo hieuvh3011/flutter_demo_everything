@@ -35,9 +35,9 @@ abstract class _HomeStore with Store {
         result = await localDatabase.getListUser();
       }
     }catch(exception){
-      print('getListUser exception = '+exception.toString());
-      debugPrintStack();
-      _showDialogError(context, exception.toString());
+      // print('getListUser exception = '+exception.toString());
+      // debugPrintStack();
+      // _showDialogError(context, exception.toString());
     }
     return result;
   }

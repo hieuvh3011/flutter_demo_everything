@@ -9,7 +9,7 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       body: GestureDetector(
         behavior: HitTestBehavior.translucent,
-        onTap: (){
+        onTap: () {
           FocusScope.of(context).requestFocus(new FocusNode());
         },
         child: Container(
