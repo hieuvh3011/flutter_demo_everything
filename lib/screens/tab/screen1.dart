@@ -27,7 +27,6 @@ class _Screen1State extends State<Screen1> {
       },
       child: Container(
         alignment: Alignment.center,
-        color: Colors.green,
         child: Center(
           child: Text(
             'Screen 1',
