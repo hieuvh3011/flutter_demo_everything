@@ -43,5 +43,17 @@
 	<false/>
 	<key>NSCameraUsageDescription</key>
     <string>Explanation on why the camera access is needed.</string>
+    <key>CFBundleURLTypes</key>
+    <array>
+    	<dict>
+    		<key>CFBundleTypeRole</key>
+    		<string>Editor</string>
+    		<key>CFBundleURLSchemes</key>
+    		<array>
+    			<!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
+    			<string>com.googleusercontent.apps.900381910709-o7hpfsd47aln8vs37nveujhhbrl0fbb8</string>
+    		</array>
+    	</dict>
+    </array>
 </dict>
 </plist>

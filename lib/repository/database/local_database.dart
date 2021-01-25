@@ -83,8 +83,8 @@ class LocalDatabase {
       listUser = await database.query(tableName);
       print('listUser = ' + listUser.toString());
     } catch (exception) {
-      print('getListUser exception = ' + exception.toString());
-      debugPrintStack();
+      // print('getListUser exception = ' + exception.toString());
+      // debugPrintStack();
     }
     return List.generate(
       listUser.length,
