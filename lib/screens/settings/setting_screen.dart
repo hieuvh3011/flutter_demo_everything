@@ -12,13 +12,11 @@ class SettingScreen extends StatefulWidget {
 class _SettingScreenState extends State<SettingScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
   }
 
@@ -30,6 +28,14 @@ class _SettingScreenState extends State<SettingScreen> {
     Navigator.of(context).pushNamed(AppRoute.ZOOM_SCREEN);
   }
 
+  void goToCamera() {
+    Navigator.of(context).pushNamed(AppRoute.TAKE_PICTURE_SCREEN);
+  }
+
+  void goToMap() {
+    Navigator.of(context).pushNamed(AppRoute.MAP_SCREEN);
+  }
+
   @override
   Widget build(BuildContext context) {
     print('rebuild setting_screen');
@@ -37,55 +43,97 @@ class _SettingScreenState extends State<SettingScreen> {
     return Observer(
       builder: (_) => Scaffold(
         appBar: AppBar(
-          title: Text('Setting Screen'),
-          centerTitle: true,
-          key: Key('setting_screen_app_bar'),
+          title: Text("Setting Screen"),
         ),
         body: Container(
           alignment: Alignment.center,
-          child: Column(
-            children: [
-              Text(
-                '${_counterStore.counter}',
-                style: TextStyle(fontSize: 20.0, color: Colors.black87),
-              ),
-              GestureDetector(
-                onTap: () {
-                  goToDetails();
-                },
-                child: Container(
-                  width: 150,
-                  height: 150,
-                  child: Hero(
-                    tag: 'image_of_crush',
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(200 / 2),
-                      child: Image(
-                        fit: BoxFit.cover,
-                        image: AssetImage('lib/res/images/crush.jpg'),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Text(
+                  '${_counterStore.counter}',
+                  style: TextStyle(fontSize: 20.0, color: Colors.black87),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    goToDetails();
+                  },
+                  child: Container(
+                    width: 150,
+                    height: 150,
+                    child: Hero(
+                      tag: 'image_of_crush',
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(200 / 2),
+                        child: Image(
+                          fit: BoxFit.cover,
+                          image: AssetImage('lib/res/images/crush.jpg'),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(height: 20.0,),
-              GestureDetector(
-                onTap: () {
-                  goToZoom();
-                },
-                child: Container(
-                  width: 150,
-                  height: 150,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(200 / 2),
-                    child: Image(
-                      fit: BoxFit.cover,
-                      image: AssetImage('lib/res/images/min.jpg'),
+                SizedBox(
+                  height: 20.0,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    goToZoom();
+                  },
+                  child: Container(
+                    width: 150,
+                    height: 150,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(200 / 2),
+                      child: Image(
+                        fit: BoxFit.cover,
+                        image: AssetImage('lib/res/images/min.jpg'),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+                SizedBox(
+                  height: 50,
+                ),
+                SizedBox(
+                  width: 150,
+                  height: 50,
+                  child: RaisedButton(
+                    onPressed: () {
+                      goToCamera();
+                    },
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    color: Colors.lightBlue,
+                    child: Text(
+                      "Go to camera",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 50,
+                ),
+                SizedBox(
+                  width: 150,
+                  height: 50,
+                  child: RaisedButton(
+                    onPressed: () {
+                      goToMap();
+                    },
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    color: Colors.lightBlue,
+                    child: Text(
+                      "Go to map",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
