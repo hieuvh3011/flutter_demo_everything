@@ -5,6 +5,14 @@ import 'package:show_off/route/app_route.dart';
 import 'package:show_off/stores/counter_store/counter_store.dart';
 
 class AccountScreen extends StatelessWidget {
+  void _goToTab(context) {
+    Navigator.of(context).pushNamed(AppRoute.TAB_CONTAINER);
+  }
+
+  void _goToVideo(context) {
+    Navigator.of(context).pushNamed(AppRoute.VIDEO_SCREEN);
+  }
+
   @override
   Widget build(BuildContext context) {
     print('rebuild account_screen');
@@ -33,7 +41,12 @@ class AccountScreen extends StatelessWidget {
                 _button(context, _counterStore.decrement, '-'),
               ],
             ),
-            _buttonGoToOther(context),
+            _buttonGoToOther(context, "Go to tab", () {
+              _goToTab(context);
+            }),
+            _buttonGoToOther(context, "Go to video", () {
+              _goToVideo(context);
+            })
           ],
         ),
       ),
@@ -61,7 +74,7 @@ class AccountScreen extends StatelessWidget {
     );
   }
 
-  _buttonGoToOther(BuildContext context) {
+  _buttonGoToOther(BuildContext context, String text, Function onPress) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
       child: SizedBox(
@@ -72,12 +85,10 @@ class AccountScreen extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
-          onPressed: () {
-            Navigator.of(context).pushNamed(AppRoute.TAB_CONTAINER);
-          },
+          onPressed: onPress,
           child: Center(
             child: Text(
-              'Go to tab',
+              text,
               style: TextStyle(fontSize: 25.0, color: Colors.white),
             ),
           ),

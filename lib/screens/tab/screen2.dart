@@ -9,27 +9,16 @@ class Screen2 extends StatefulWidget {
 }
 
 class _Screen2State extends State<Screen2> {
-  void _handleSwipe(details) {
-    print('swipe right: $details');
-    widget.runToOtherTab();
-  }
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onPanUpdate: (details) {
-        if (details.delta.dx > 0) {
-          _handleSwipe(details);
-        }
-      },
-      child: Container(
-        alignment: Alignment.center,
-        child: Center(
-          child: Text(
-            'Screen 2',
-            style: TextStyle(
-              fontSize: 20,
-            ),
+    return Container(
+      alignment: Alignment.center,
+      child: Center(
+        child: Text(
+          'Screen 2',
+          style: TextStyle(
+            fontSize: 20,
           ),
         ),
       ),
