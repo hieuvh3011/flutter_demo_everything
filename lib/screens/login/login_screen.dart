@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:show_off/route/app_route.dart';
 import 'package:show_off/stores/login_store/login_store.dart';
 
@@ -208,10 +209,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     Navigator.of(context)
                         .pushReplacementNamed(AppRoute.HOME_SCREEN)
                   })
-              .catchError((error) {
-            AlertDialog(
-              title: Text("Error while authenticate"),
-              content: Text(error.toString()),
+              .catchError((error, stackTrace) {
+            Sentry.captureException(
+              error,
+              stackTrace: stackTrace,
             );
           });
         },
