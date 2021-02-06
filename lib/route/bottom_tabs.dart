@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:show_off/screens/account/account_screen.dart';
+import 'package:show_off/screens/chat/chat_container.dart';
 import 'package:show_off/screens/home/home_screen.dart';
 import 'package:show_off/screens/settings/setting_screen.dart';
 
@@ -14,6 +15,7 @@ class _BottomTabsState extends State<BottomTabs> {
     HomeScreen(),
     AccountScreen(),
     SettingScreen(),
+    ChatContainer(),
   ];
 
   void _onItemTapped(int index) {
@@ -54,6 +56,10 @@ class _BottomTabsState extends State<BottomTabs> {
             BottomNavigationBarItem(
               icon: Icon(Icons.settings),
               label: 'Settings',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.chat),
+              label: 'Chat',
             ),
           ],
           currentIndex: _selectedIndex,
