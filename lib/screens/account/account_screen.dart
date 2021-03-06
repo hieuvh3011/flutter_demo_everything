@@ -13,6 +13,10 @@ class AccountScreen extends StatelessWidget {
     Navigator.of(context).pushNamed(AppRoute.VIDEO_SCREEN);
   }
 
+  void _goToChatScreen2(context) {
+    Navigator.of(context).pushNamed(AppRoute.CHAT_CONTAINER, arguments: 1);
+  }
+
   @override
   Widget build(BuildContext context) {
     print('rebuild account_screen');
@@ -46,7 +50,10 @@ class AccountScreen extends StatelessWidget {
             }),
             _buttonGoToOther(context, "Go to video", () {
               _goToVideo(context);
-            })
+            }),
+            _buttonGoToOther(context, "Chat screen 2", () {
+              _goToChatScreen2(context);
+            }),
           ],
         ),
       ),
@@ -89,7 +96,7 @@ class AccountScreen extends StatelessWidget {
           child: Center(
             child: Text(
               text,
-              style: TextStyle(fontSize: 25.0, color: Colors.white),
+              style: TextStyle(fontSize: 20.0, color: Colors.white),
             ),
           ),
         ),

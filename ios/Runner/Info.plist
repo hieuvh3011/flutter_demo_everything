@@ -60,5 +60,7 @@
       <key>NSAllowsArbitraryLoads</key>
       <true/>
     </dict>
+    <key>NSFaceIDUsageDescription</key>
+    <string>Using FaceId to login</string>
 </dict>
 </plist>

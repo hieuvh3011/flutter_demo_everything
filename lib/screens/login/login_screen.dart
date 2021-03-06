@@ -67,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
         _authorized = 'Authenticating';
       });
     } on PlatformException catch (e) {
-      print(e);
+      print("Authenticating error: " + e.toString());
     }
     if (!mounted) return;
 
@@ -207,9 +207,11 @@ class _LoginScreenState extends State<LoginScreen> {
           _authenticate()
               .then((value) => {
                     Navigator.of(context)
-                        .pushReplacementNamed(AppRoute.HOME_SCREEN)
+                        .pushReplacementNamed(AppRoute.BOTTOM_TAB)
                   })
               .catchError((error, stackTrace) {
+            print('error: ' + error.toString());
+            print('stackTrace: ' + stackTrace.toString());
             Sentry.captureException(
               error,
               stackTrace: stackTrace,

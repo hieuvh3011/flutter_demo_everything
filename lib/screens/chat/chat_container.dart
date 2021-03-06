@@ -6,8 +6,10 @@ import 'package:show_off/screens/chat/chat_screen_3.dart';
 class ChatContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final index = ModalRoute.of(context).settings.arguments;
     return DefaultTabController(
       length: 3,
+      initialIndex: index != null ? index : 0,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -15,7 +17,7 @@ class ChatContainer extends StatelessWidget {
             color: Colors.black54,
           ),
           title: Text(
-            'Chat Container',
+           'Chat Container',
             style: TextStyle(color: Colors.black54),
           ),
           centerTitle: true,
