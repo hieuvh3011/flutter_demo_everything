@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -78,10 +79,9 @@ abstract class LoginStoreBase with Store {
       print('password = ' + password);
       if (validatePassword(password) == null && validateEmail(email) == null) {
         EasyLoading.show(status: 'loading...');
-        Navigator.of(context).pushReplacementNamed(AppRoute.BOTTOM_TAB);
-        Future.delayed(Duration(seconds: 2), () {
-          EasyLoading.dismiss();
-        });
+        loginWithFirebase(email, password, context)
+            .then((value) => {EasyLoading.dismiss()})
+            .catchError((onError) => {EasyLoading.dismiss()});
       } else {
         emailFormKey.currentState.validate();
         passwordFormKey.currentState.validate();
@@ -89,6 +89,22 @@ abstract class LoginStoreBase with Store {
     } catch (error) {
       print('error onPressedLoginButton = ' + error);
       debugPrintStack();
+    }
+  }
+
+  Future<void> loginWithFirebase(
+      String email, String password, BuildContext context) async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+      print('user credential = ' + userCredential.toString());
+      Navigator.of(context).pushReplacementNamed(AppRoute.BOTTOM_TAB);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
     }
   }
 

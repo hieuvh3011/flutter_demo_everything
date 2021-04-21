@@ -17,7 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool _canCheckBiometrics;
 
-  List<BiometricType> _availableBiometrics = List();
+  List<BiometricType> _availableBiometrics = [];
 
   String _authorized = 'Not Authorized';
 
@@ -98,10 +98,13 @@ class _LoginScreenState extends State<LoginScreen> {
         },
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: ListView(
+            // crossAxisAlignment: CrossAxisAlignment.center,
+            // mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              SizedBox(
+                height: 200.0,
+              ),
               Form(
                 key: _loginStore.emailFormKey,
                 child: TextFormField(
