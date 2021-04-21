@@ -17,6 +17,11 @@ class AccountScreen extends StatelessWidget {
     Navigator.of(context).pushNamed(AppRoute.CHAT_CONTAINER, arguments: 1);
   }
 
+  void _logout(context) {
+    Navigator.pushNamedAndRemoveUntil(
+        context, AppRoute.LOGIN_SCREEN, (_) => false);
+  }
+
   @override
   Widget build(BuildContext context) {
     print('rebuild account_screen');
@@ -54,6 +59,9 @@ class AccountScreen extends StatelessWidget {
             _buttonGoToOther(context, "Chat screen 2", () {
               _goToChatScreen2(context);
             }),
+            _buttonGoToOther(context, "Logout", () {
+              _logout(context);
+            })
           ],
         ),
       ),
@@ -65,12 +73,16 @@ class AccountScreen extends StatelessWidget {
       width: 45.0,
       height: 45.0,
       margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-      child: RaisedButton(
-        color: Colors.lightBlue,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
+      child: ElevatedButton(
         onPressed: onPressed,
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(Colors.lightBlue),
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+          ),
+        ),
         child: Center(
           child: Text(
             text,
@@ -87,10 +99,14 @@ class AccountScreen extends StatelessWidget {
       child: SizedBox(
         height: 50.0,
         width: 200.0,
-        child: RaisedButton(
-          color: Colors.lightBlue,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
+        child: ElevatedButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(Colors.lightBlue),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+            ),
           ),
           onPressed: onPress,
           child: Center(
