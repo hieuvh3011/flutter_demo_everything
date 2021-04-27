@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:show_off/route/bottom_tabs.dart';
 import 'package:show_off/screens/account/account_screen.dart';
 import 'package:show_off/screens/chat/chat_container.dart';
-import 'package:show_off/screens/chat/chat_screen_1.dart';
-import 'package:show_off/screens/chat/chat_screen_2.dart';
-import 'package:show_off/screens/chat/chat_screen_3.dart';
+import 'package:show_off/screens/chat/list_user_screen.dart';
+import 'package:show_off/screens/chat/conversation_screen.dart';
+import 'package:show_off/screens/chat/assets_conversation_screen.dart';
+import 'package:show_off/screens/chat/search_screen.dart';
 import 'package:show_off/screens/details/details_screen.dart';
 import 'package:show_off/screens/home/home_screen.dart';
 import 'package:show_off/screens/login/login_screen.dart';
@@ -33,9 +34,10 @@ class AppRoute {
   static const TAB_CONTAINER = ROOT + 'tab_container';
   static const VIDEO_SCREEN = ROOT + 'video_screen';
   static const CHAT_CONTAINER = ROOT + 'chat_container';
-  static const CHAT_SCREEN_1 = CHAT_CONTAINER + "/chat_screen_1";
-  static const CHAT_SCREEN_2 = CHAT_CONTAINER + "/chat_screen_2";
-  static const CHAT_SCREEN_3 = CHAT_CONTAINER + "/chat_screen_3";
+  static const LIST_USER_SCREEN = CHAT_CONTAINER + "/list_user_screen";
+  static const CONVERSATION_SCREEN = CHAT_CONTAINER + "/conversation_screen";
+  static const ASSETS_SHARED_SCREEN = CHAT_CONTAINER + "/assets_shared_screen";
+  static const SEARCH_SCREEN = CHAT_CONTAINER + '/search_screen';
 
   static final routes = <String, WidgetBuilder>{
     ROOT: (BuildContext context) => SplashScreen(),
@@ -52,9 +54,10 @@ class AppRoute {
     TAB_CONTAINER: (BuildContext context) => TabContainer(),
     VIDEO_SCREEN: (BuildContext context) => VideoScreen(),
     CHAT_CONTAINER: (BuildContext context) => ChatContainer(),
-    CHAT_SCREEN_1: (BuildContext context) => ChatScreen1(),
-    CHAT_SCREEN_2: (BuildContext context) => ChatScreen2(),
-    CHAT_SCREEN_3: (BuildContext context) => ChatScreen3(),
+    LIST_USER_SCREEN: (BuildContext context) => ListUserScreen(),
+    CONVERSATION_SCREEN: (BuildContext context) => ConversationScreen(),
+    ASSETS_SHARED_SCREEN: (BuildContext context) => AssetsConversationScreen(),
+    SEARCH_SCREEN: (BuildContext context) => SearchScreen(),
   };
 
   static void setHomeScreenAsRoot(context) {

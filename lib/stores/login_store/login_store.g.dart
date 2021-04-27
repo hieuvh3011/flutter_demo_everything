@@ -55,6 +55,46 @@ mixin _$LoginStore on LoginStoreBase, Store {
     });
   }
 
+  final _$currentUserAtom = Atom(name: 'LoginStoreBase.currentUser');
+
+  @override
+  ChatUser get currentUser {
+    _$currentUserAtom.reportRead();
+    return super.currentUser;
+  }
+
+  @override
+  set currentUser(ChatUser value) {
+    _$currentUserAtom.reportWrite(value, super.currentUser, () {
+      super.currentUser = value;
+    });
+  }
+
+  final _$listContactAtom = Atom(name: 'LoginStoreBase.listContact');
+
+  @override
+  ObservableList<ChatUser> get listContact {
+    _$listContactAtom.reportRead();
+    return super.listContact;
+  }
+
+  @override
+  set listContact(ObservableList<ChatUser> value) {
+    _$listContactAtom.reportWrite(value, super.listContact, () {
+      super.listContact = value;
+    });
+  }
+
+  final _$loginWithServerAsyncAction =
+      AsyncAction('LoginStoreBase.loginWithServer');
+
+  @override
+  Future<dynamic> loginWithServer(
+      String email, String password, BuildContext context) {
+    return _$loginWithServerAsyncAction
+        .run(() => super.loginWithServer(email, password, context));
+  }
+
   final _$LoginStoreBaseActionController =
       ActionController(name: 'LoginStoreBase');
 
@@ -125,11 +165,35 @@ mixin _$LoginStore on LoginStoreBase, Store {
   }
 
   @override
+  dynamic storeUser(Map<String, dynamic> user) {
+    final _$actionInfo = _$LoginStoreBaseActionController.startAction(
+        name: 'LoginStoreBase.storeUser');
+    try {
+      return super.storeUser(user);
+    } finally {
+      _$LoginStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic deleteUser() {
+    final _$actionInfo = _$LoginStoreBaseActionController.startAction(
+        name: 'LoginStoreBase.deleteUser');
+    try {
+      return super.deleteUser();
+    } finally {
+      _$LoginStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 emailController: ${emailController},
 passwordController: ${passwordController},
-isLoading: ${isLoading}
+isLoading: ${isLoading},
+currentUser: ${currentUser},
+listContact: ${listContact}
     ''';
   }
 }

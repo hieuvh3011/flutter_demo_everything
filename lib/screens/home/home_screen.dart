@@ -16,7 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     _homeStore = Provider.of<HomeStore>(context);
-    listUsers = _homeStore.getListUser(context);
+    // listUsers = _homeStore.getListUser(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Home Screen'),
@@ -32,21 +32,21 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           } else {
             children = Container(
-              child: RefreshIndicator(
-                onRefresh: () {
-                  return Future.delayed(Duration(seconds: 2));
-                },
-                child: ListView.builder(
-                  itemCount: snapshot?.data?.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    int id = snapshot?.data[index]?.id;
-                    String name = snapshot?.data[index]?.name;
-                    String avatarUrl = snapshot?.data[index]?.avatarUrl;
-                    String address = snapshot?.data[index]?.address;
-                    return ItemUser(id, name, avatarUrl, address, () {});
-                  },
-                ),
-              ),
+              // child: RefreshIndicator(
+              //   onRefresh: () {
+              //     return Future.delayed(Duration(seconds: 2));
+              //   },
+                // child: ListView.builder(
+                //   itemCount: snapshot?.data?.length,
+                //   itemBuilder: (BuildContext context, int index) {
+                //     int id = snapshot?.data[index]?.id;
+                //     String name = snapshot?.data[index]?.name;
+                //     String avatarUrl = snapshot?.data[index]?.avatarUrl;
+                //     String address = snapshot?.data[index]?.address;
+                //     return ItemUser(id, name, avatarUrl, address, () {});
+                //   },
+                // ),
+              // ),
             );
           }
           return children;

@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
+import 'package:flutter_statusbar_manager/flutter_statusbar_manager.dart';
 import 'package:show_off/route/app_route.dart';
 import 'package:show_off/screens/something_went_wrong/something_went_wrong_screen.dart';
 
@@ -12,13 +12,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FlutterStatusbarcolor.setStatusBarColor(Colors.transparent);
-    FlutterStatusbarcolor.setStatusBarWhiteForeground(false);
+    // FlutterStatusbarManager.setTranslucent(true);
+    // FlutterStatusbarManager.setStyle(StatusBarStyle.DARK_CONTENT);
     return FutureBuilder(
       future: _initialization,
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          return SomethingWentWrongScreen();
+          return MaterialApp(
+            title: 'Flutter Demo',
+            home: SomethingWentWrongScreen(
+              error: snapshot.error.toString(),
+            ),
+          );
         }
 
         // Once complete, show your application

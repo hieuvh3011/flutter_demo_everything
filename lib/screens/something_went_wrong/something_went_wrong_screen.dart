@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 
 class SomethingWentWrongScreen extends StatelessWidget {
+  final String error;
+
+  SomethingWentWrongScreen({this.error});
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      child: Text("Something went wrong, please try again in our app later"),
+    return Scaffold(
+      body: Container(
+        padding: EdgeInsets.symmetric(horizontal: 15.0),
+        alignment: Alignment.center,
+        child: Text("Error = " + error),
+      ),
     );
   }
 }

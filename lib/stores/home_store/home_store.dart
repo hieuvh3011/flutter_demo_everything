@@ -27,7 +27,7 @@ abstract class _HomeStore with Store {
     List<User> result = List<User>();
     try{
       if (await localDatabase.isTableUserEmpty()){
-        var response = await Network.fetchData();
+        var response = await Network.fetchingMockData();
         Iterable list = json.decode(response);
         result = list.map((model) => User.fromJson(model)).toList();
         await localDatabase.insertListUser(result);

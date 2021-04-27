@@ -1,9 +1,16 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mobx/mobx.dart';
 import 'package:show_off/business_logic/validator.dart';
+import 'package:show_off/model/app_response.dart';
+import 'package:show_off/model/chat_user.dart';
+import 'package:show_off/repository/network/network_dio.dart';
+import 'package:show_off/repository/network/network_url.dart';
 import 'package:show_off/route/app_route.dart';
 
 part 'login_store.g.dart';
@@ -26,6 +33,12 @@ abstract class LoginStoreBase with Store {
 
   @observable
   bool isLoading = false;
+
+  @observable
+  ChatUser currentUser;
+
+  @observable
+  ObservableList<ChatUser> listContact;
 
   @action
   hideLoading() {
@@ -79,7 +92,10 @@ abstract class LoginStoreBase with Store {
       print('password = ' + password);
       if (validatePassword(password) == null && validateEmail(email) == null) {
         EasyLoading.show(status: 'loading...');
-        loginWithFirebase(email, password, context)
+        // loginWithFirebase(email, password, context)
+        //     .then((value) => {EasyLoading.dismiss()})
+        //     .catchError((onError) => {EasyLoading.dismiss()});
+        loginWithServer(email, password, context)
             .then((value) => {EasyLoading.dismiss()})
             .catchError((onError) => {EasyLoading.dismiss()});
       } else {
@@ -92,19 +108,91 @@ abstract class LoginStoreBase with Store {
     }
   }
 
-  Future<void> loginWithFirebase(
+  @action
+  storeUser(Map<String, dynamic> user) {
+    currentUser = ChatUser.fromJson(user);
+  }
+
+  @action
+  deleteUser() {
+    currentUser = ChatUser.fromJson({});
+  }
+
+  @action
+  Future<dynamic> loginWithServer(
       String email, String password, BuildContext context) async {
     try {
-      UserCredential userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
-      print('user credential = ' + userCredential.toString());
-      Navigator.of(context).pushReplacementNamed(AppRoute.BOTTOM_TAB);
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
-      }
+      DioNetwork dio = DioNetwork.getInstance();
+      Map<String, dynamic> params = {"email": email, "password": password};
+      AppResponse appResponse;
+      await dio.callPostApi(NetworkUrl.loginUrl, params).then((response) {
+        // appResponse = AppResponse.fromJson(response.data),
+        // print("app response = " + appResponse.toString())
+        appResponse = AppResponse.fromJson(response.data);
+        print(appResponse.status);
+        if (appResponse.status == 0) {
+          Map<String, dynamic> data = appResponse.data;
+          storeUser(data);
+          Navigator.of(context).pushReplacementNamed(AppRoute.BOTTOM_TAB);
+        } else {
+          String errorMessage = appResponse.message;
+          Widget alertDialog = CupertinoAlertDialog(
+            title: new Text("Error"),
+            content: new Text(errorMessage),
+            actions: <Widget>[
+              CupertinoDialogAction(
+                isDefaultAction: true,
+                child: Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+          showDialog(
+            context: context,
+            builder: (BuildContext context) => alertDialog,
+          );
+        }
+      });
+      // if (response?.data?.status == 0) {
+      //   Navigator.of(context).pushReplacementNamed(AppRoute.BOTTOM_TAB);
+      // } else {
+      //   String errorMessage = response?.data?.message ?? "some error happened";
+      //   AlertDialog alertDialog = AlertDialog(
+      //     title: Text("Error"),
+      //     content: Text(errorMessage),
+      //   );
+      //   showDialog(
+      //     context: context,
+      //     builder: (BuildContext context) => alertDialog,
+      //   );
+      // }
+    } catch (error) {
+      print('Error login with server = $error');
+      debugPrintStack();
+      Widget okButton = TextButton(
+        child: Text("OK"),
+        onPressed: () {},
+      );
+      Widget alertDialog = CupertinoAlertDialog(
+        title: new Text("Error"),
+        content: new Text(error.toString()),
+        actions: <Widget>[
+          CupertinoDialogAction(
+            isDefaultAction: true,
+            child: Text("OK"),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => alertDialog,
+      );
     }
   }
 

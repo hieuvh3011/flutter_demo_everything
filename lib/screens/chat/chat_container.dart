@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:show_off/screens/chat/chat_screen_1.dart';
-import 'package:show_off/screens/chat/chat_screen_2.dart';
-import 'package:show_off/screens/chat/chat_screen_3.dart';
+import 'package:show_off/screens/chat/list_user_screen.dart';
+import 'package:show_off/screens/chat/conversation_screen.dart';
+import 'package:show_off/screens/chat/assets_conversation_screen.dart';
 
 class ChatContainer extends StatelessWidget {
   @override
@@ -17,7 +17,7 @@ class ChatContainer extends StatelessWidget {
             color: Colors.black54,
           ),
           title: Text(
-           'Chat Container',
+           'Skype Super Fake',
             style: TextStyle(color: Colors.black54),
           ),
           centerTitle: true,
@@ -27,22 +27,22 @@ class ChatContainer extends StatelessWidget {
             unselectedLabelColor: Colors.black54,
             tabs: [
               Tab(
-                text: "Chat 1",
+                text: "List User",
               ),
               Tab(
-                text: "Chat 2",
+                text: "Conversation",
               ),
               Tab(
-                text: "Chat 3",
+                text: "Assets shared",
               ),
             ],
           ),
         ),
         body: TabBarView(
           children: [
-            ChatScreen1(),
-            ChatScreen2(),
-            ChatScreen3(),
+            ListUserScreen(),
+            ConversationScreen(),
+            AssetsConversationScreen(),
           ],
         ),
       ),
