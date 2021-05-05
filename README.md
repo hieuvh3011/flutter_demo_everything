@@ -9,7 +9,7 @@ If you are totally new to Flutter or not know what is it, you probably will want
 ## 3. Setup and run the application
 Step 1: Clone the repository from GitHub:
 ```bash
-$ git clone git@github.com:quikapp/app.git
+$ git clone https://github.com/hieuvh3011/flutter_show_off.git
 ```
 or fork it from repository. If you don't know how to fork, check [this](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo).
 
@@ -69,7 +69,7 @@ follow [Flutter testing documentation](https://flutter.dev/docs/testing)
 From my experience, I will use the structure below. If you guys find anything unreasonable or can
  be improved in this structure, please let me know. 
 - `lib`: this folder to contain the main code part of our application
-  - `app`: this folder contain widget of Quik App
+  - `app`: this folder contain parent widgets of application
   - `business_logic`: this folder use to contain the main business logic inside of application
   . Example, for now, this part will contain `app_date_time.dart` to process all of date time
    logic inside of app.

@@ -1,22 +1,17 @@
-import 'package:mobx/mobx.dart';
+import 'package:flutter/material.dart';
 
-part 'counter_store.g.dart';
-
-class CounterStore = _CounterStore with _$CounterStore;
-
-abstract class _CounterStore with Store {
-  @observable
+class CounterStore extends ChangeNotifier {
   int counter = 0;
 
-  @action
   void increment() {
     counter++;
+    notifyListeners();
   }
 
-  @action
   void decrement() {
     if (counter != 0) {
       counter--;
+      notifyListeners();
     }
   }
 }
