@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 class ChatUser {
   String id;
   String fullName;
   String email;
   String phone;
+  String avatarUrl;
   List<ChatUser> contactList;
 
   ChatUser({
@@ -11,6 +14,7 @@ class ChatUser {
     this.email,
     this.phone,
     this.contactList,
+    this.avatarUrl = "",
   });
 
   // ChatUser.fromJson(Map<String, dynamic> jsonObject)
@@ -26,11 +30,12 @@ class ChatUser {
     user.fullName = jsonObject['full_name'];
     user.email = jsonObject['email'];
     user.phone = jsonObject['phone'];
-    var rawContactList = jsonObject['contact'];
+    user.avatarUrl = jsonObject['avatar'];
+    var rawContactList = jsonObject['contact_list'] as List ?? [];
     user.contactList = [];
-    rawContactList?.map((item){
-      if (item != null){
-        var itemUser = ChatUser.fromJson(item);
+    rawContactList?.forEach((element) {
+      if (element != null) {
+        var itemUser = ChatUser.fromJson(element);
         user.contactList.add(itemUser);
       }
     });
@@ -44,5 +49,12 @@ class ChatUser {
         'email': email,
         'phone': phone,
         'contact_list': contactList,
+        'avatar': avatarUrl
       };
+
+  @override
+  String toString() {
+    // TODO: implement toString
+    return "ChatUser: id = $id, name = $fullName, email = $email, phone = $phone, contactList = $contactList";
+  }
 }

@@ -5,7 +5,7 @@ import 'package:show_off/model/user.dart';
 import 'package:show_off/repository/database/local_database.dart';
 import 'package:show_off/repository/network/network.dart';
 
-class HomeStoreMigration extends ChangeNotifier{
+class HomeStore extends ChangeNotifier{
   int page = 0;
 
   int limit = 10;
@@ -30,7 +30,7 @@ class HomeStoreMigration extends ChangeNotifier{
       // debugPrintStack();
       // _showDialogError(context, exception.toString());
     }
-    notifyListeners();
+    // notifyListeners();
     return result;
   }
 

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:show_off/business_logic/validator.dart';
 import 'package:show_off/model/app_response.dart';
 import 'package:show_off/model/chat_user.dart';
@@ -9,7 +10,7 @@ import 'package:show_off/repository/network/network_dio.dart';
 import 'package:show_off/repository/network/network_url.dart';
 import 'package:show_off/route/app_route.dart';
 
-class LoginStoreMigration extends ChangeNotifier{
+class LoginStore extends ChangeNotifier {
   final GlobalKey<FormState> emailFormKey = GlobalKey<FormState>();
   final GlobalKey<FormState> passwordFormKey = GlobalKey<FormState>();
   GoogleSignIn _googleSignIn = GoogleSignIn(
@@ -89,9 +90,13 @@ class LoginStoreMigration extends ChangeNotifier{
     }
   }
 
-  storeUser(Map<String, dynamic> user) {
+  storeUser(Map<String, dynamic> user) async {
     currentUser = ChatUser.fromJson(user);
     print('stored User = ${currentUser.toString()}');
+
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setString('access_token', user['access_token'] ?? "");
+
     notifyListeners();
   }
 
@@ -180,19 +185,19 @@ class LoginStoreMigration extends ChangeNotifier{
   void onPressLoginWithGoogle() {
     try {
       _googleSignIn.isSignedIn().then((value) => {
-        if (value == true)
-          {
-            _googleSignIn.signOut().then((value) => _googleSignIn
-                .signIn()
-                .then(
-                    (value) => print('Login success: ' + value.toString())))
-          }
-        else
-          {
-            _googleSignIn.signIn().then(
+            if (value == true)
+              {
+                _googleSignIn.signOut().then((value) => _googleSignIn
+                    .signIn()
+                    .then(
+                        (value) => print('Login success: ' + value.toString())))
+              }
+            else
+              {
+                _googleSignIn.signIn().then(
                     (value) => print('Login success: ' + value.toString()))
-          }
-      });
+              }
+          });
 
       // _googleSignIn
       //     .signIn()

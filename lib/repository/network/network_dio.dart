@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:show_off/repository/network/network_interceptor.dart';
 
 class DioNetwork {
@@ -10,20 +11,26 @@ class DioNetwork {
   static Dio dio;
   static DioNetwork _instance;
 
-  static DioNetwork getInstance() {
+  static getInstance() {
     if (_instance == null) {
-      _instance = new DioNetwork();
       initDio();
+      _instance = new DioNetwork();
     }
     return _instance;
   }
 
-  static void initDio() {
+  static initDio() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String accessToken = preferences.getString('access_token') ?? "";
     var options = BaseOptions(
       baseUrl: 'https://chat-app-mongo.herokuapp.com/',
       connectTimeout: 30000,
       receiveTimeout: 10000,
       contentType: 'application/x-www-form-urlencoded',
+      headers: {
+        "accept": "*/*",
+        "Authorization": "Bearer $accessToken",
+      },
     );
     dio = new Dio(options);
     NetworkInterceptor _interceptor = NetworkInterceptor();
@@ -31,9 +38,7 @@ class DioNetwork {
   }
 
   callApi(String url, Map<String, dynamic> params, String method) async {
-    if (dio == null) {
-      initDio();
-    }
+    await initDio();
 
     if (method == 'GET') {
       return await dio.get(url, queryParameters: params);
@@ -42,14 +47,12 @@ class DioNetwork {
         data: params, options: Options(method: method));
   }
 
-  callGetApi(String url, Map<String, dynamic> params) async {
+  callGetApi(String url, [Map<String, dynamic> params]) async {
     return await callApi(url, params, 'GET');
   }
 
   callPostApi(String url, Map<String, dynamic> params) async {
-    if (dio == null) {
-      initDio();
-    }
+    await initDio();
     return await dio.post(url, data: params);
   }
 
@@ -60,4 +63,6 @@ class DioNetwork {
   callDeleteApi(String url, Map<String, dynamic> params) async {
     return await callApi(url, params, 'DELETE');
   }
+
+  handleTokenExpired() async {}
 }

@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:show_off/model/app_response.dart';
 
 class NetworkInterceptor extends Interceptor {
   @override
@@ -7,6 +9,7 @@ class NetworkInterceptor extends Interceptor {
       "data": options.data,
       "url": options.path,
       "queryParams": options.queryParameters,
+      "headers": options.headers
     };
     print('onRequest = ${requestOptions.toString()}');
     return super.onRequest(options);
@@ -20,7 +23,16 @@ class NetworkInterceptor extends Interceptor {
 
   @override
   Future onError(DioError err) {
-    print('onError = ${err.toString()}');
+    // AppResponse appResponse = AppResponse.fromJson(err?.response ?? {});
+    print('onError = ${err?.response}');
+    Response response = err?.response ?? new Response();
+    if (response?.statusCode == 403){
+      print("onError response = ${response?.data['message']}");
+    }
+    debugPrintStack();
+    AppResponse appResponse = new AppResponse();
+    appResponse.message = response?.statusMessage;
+
     return super.onError(err);
   }
 }
