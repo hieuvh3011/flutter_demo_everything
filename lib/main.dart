@@ -1,5 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_statusbar_manager/flutter_statusbar_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:show_off/app/app.dart';
@@ -10,6 +11,7 @@ Future<void> main() async {
       'https://8fdf5370effb4551b0f59fb2a3515c9f@o517051.ingest.sentry.io/5624280';
 
   WidgetsFlutterBinding.ensureInitialized();
+  await FlutterStatusbarManager.setStyle(StatusBarStyle.DARK_CONTENT);
   await SentryFlutter.init(
     (options) {
       options.dsn = sentryDSN;

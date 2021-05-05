@@ -1,33 +1,24 @@
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:mobx/mobx.dart';
 import 'package:show_off/model/user.dart';
 import 'package:show_off/repository/database/local_database.dart';
 import 'package:show_off/repository/network/network.dart';
 
-part 'home_store.g.dart';
-
-class HomeStore = _HomeStore with _$HomeStore;
-
-abstract class _HomeStore with Store {
-  @observable
+class HomeStore extends ChangeNotifier{
   int page = 0;
 
-  @observable
   int limit = 10;
 
-  @observable
-  ObservableList<User> listUsers;
+  List<User> listUsers;
 
   LocalDatabase localDatabase = LocalDatabase();
 
-  @action
   Future<List<User>> getListUser([BuildContext context]) async {
-    List<User> result = List<User>();
+    List<User> result = [];
     try{
       if (await localDatabase.isTableUserEmpty()){
-        var response = await Network.fetchData();
+        var response = await Network.fetchingMockData();
         Iterable list = json.decode(response);
         result = list.map((model) => User.fromJson(model)).toList();
         await localDatabase.insertListUser(result);
@@ -39,14 +30,15 @@ abstract class _HomeStore with Store {
       // debugPrintStack();
       // _showDialogError(context, exception.toString());
     }
+    // notifyListeners();
     return result;
   }
 
-  @action
   Future<void> saveListUserToLocalDatabase(List<User> listUsers) async {
     if (await localDatabase.isTableUserEmpty()){
       await localDatabase.insertListUser(listUsers);
     }
+    notifyListeners();
   }
 
   Future<void> _showDialogError(BuildContext context, String error) async {

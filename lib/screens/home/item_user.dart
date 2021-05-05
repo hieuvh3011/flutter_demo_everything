@@ -27,10 +27,12 @@ class ItemUser extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
+    return ElevatedButton(
       key: Key('item $id'),
       onPressed: onPress,
-      color: Colors.white,
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+      ),
       child: Container(
         alignment: Alignment.center,
         height: itemHeight + 20,
@@ -63,7 +65,10 @@ class ItemUser extends StatelessWidget {
                       alignment: AlignmentDirectional.centerStart,
                       child: Text(
                         this.name,
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black54,
+                        ),
                       ),
                     ),
                     flex: 3,
@@ -78,7 +83,10 @@ class ItemUser extends StatelessWidget {
                       alignment: AlignmentDirectional.centerStart,
                       child: Text(
                         this.address,
-                        style: TextStyle(fontStyle: FontStyle.italic),
+                        style: TextStyle(
+                          fontStyle: FontStyle.italic,
+                          color: Colors.black54,
+                        ),
                       ),
                     ),
                     flex: 2,
