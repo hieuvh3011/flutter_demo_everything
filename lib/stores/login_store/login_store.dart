@@ -1,11 +1,7 @@
-import 'dart:convert';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:mobx/mobx.dart';
 import 'package:show_off/business_logic/validator.dart';
 import 'package:show_off/model/app_response.dart';
 import 'package:show_off/model/chat_user.dart';
@@ -13,11 +9,7 @@ import 'package:show_off/repository/network/network_dio.dart';
 import 'package:show_off/repository/network/network_url.dart';
 import 'package:show_off/route/app_route.dart';
 
-part 'login_store.g.dart';
-
-class LoginStore = LoginStoreBase with _$LoginStore;
-
-abstract class LoginStoreBase with Store {
+class LoginStoreMigration extends ChangeNotifier{
   final GlobalKey<FormState> emailFormKey = GlobalKey<FormState>();
   final GlobalKey<FormState> passwordFormKey = GlobalKey<FormState>();
   GoogleSignIn _googleSignIn = GoogleSignIn(
@@ -25,39 +17,30 @@ abstract class LoginStoreBase with Store {
       'email',
     ],
   );
-  @observable
   TextEditingController emailController = TextEditingController();
 
-  @observable
   TextEditingController passwordController = TextEditingController();
 
-  @observable
   bool isLoading = false;
 
-  @observable
   ChatUser currentUser;
 
-  @observable
-  ObservableList<ChatUser> listContact;
+  List<ChatUser> listContact;
 
-  @action
   hideLoading() {
     if (isLoading == true) {
       isLoading = false;
     }
   }
 
-  @action
   onChangeUsername(text) {
     emailFormKey.currentState.validate();
   }
 
-  @action
   onChangePassword(text) {
     passwordFormKey.currentState.validate();
   }
 
-  @action
   String validateEmail(String email) {
     String result = '';
     Validator validator = Validator();
@@ -72,7 +55,6 @@ abstract class LoginStoreBase with Store {
     return result;
   }
 
-  @action
   String validatePassword(String password) {
     Validator validator = Validator();
     if (password == '') {
@@ -83,7 +65,6 @@ abstract class LoginStoreBase with Store {
     return null;
   }
 
-  @action
   void onPressedLoginButton(BuildContext context) {
     try {
       String email = emailController.text;
@@ -108,17 +89,17 @@ abstract class LoginStoreBase with Store {
     }
   }
 
-  @action
   storeUser(Map<String, dynamic> user) {
     currentUser = ChatUser.fromJson(user);
+    print('stored User = ${currentUser.toString()}');
+    notifyListeners();
   }
 
-  @action
   deleteUser() {
     currentUser = ChatUser.fromJson({});
+    notifyListeners();
   }
 
-  @action
   Future<dynamic> loginWithServer(
       String email, String password, BuildContext context) async {
     try {
@@ -199,19 +180,19 @@ abstract class LoginStoreBase with Store {
   void onPressLoginWithGoogle() {
     try {
       _googleSignIn.isSignedIn().then((value) => {
-            if (value == true)
-              {
-                _googleSignIn.signOut().then((value) => _googleSignIn
-                    .signIn()
-                    .then(
-                        (value) => print('Login success: ' + value.toString())))
-              }
-            else
-              {
-                _googleSignIn.signIn().then(
+        if (value == true)
+          {
+            _googleSignIn.signOut().then((value) => _googleSignIn
+                .signIn()
+                .then(
+                    (value) => print('Login success: ' + value.toString())))
+          }
+        else
+          {
+            _googleSignIn.signIn().then(
                     (value) => print('Login success: ' + value.toString()))
-              }
-          });
+          }
+      });
 
       // _googleSignIn
       //     .signIn()
