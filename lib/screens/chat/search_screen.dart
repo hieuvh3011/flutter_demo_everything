@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:show_off/business_logic/firestore_integration.dart';
 import 'package:show_off/model/user.dart';
 import 'package:show_off/screens/home/item_user.dart';
 
@@ -14,22 +13,20 @@ class _SearchScreenState extends State<SearchScreen> {
   List<User> result = [];
   String email;
   TextEditingController _searchController;
-  FireStoreIntegration _fireStoreIntegration;
+  // FireStoreIntegration _fireStoreIntegration;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     setState(() {
       email = "email";
     });
     _searchController = TextEditingController();
-    _fireStoreIntegration = FireStoreIntegration();
+    // _fireStoreIntegration = FireStoreIntegration();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _searchController.dispose();
   }
@@ -129,14 +126,14 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
-  Widget _buildResultEmpty(BuildContext context, String email) {
-    return Expanded(
-      child: Container(
-        alignment: Alignment.center,
-        child: Text("Cannot find any result with $email"),
-      ),
-    );
-  }
+  // Widget _buildResultEmpty(BuildContext context, String email) {
+  //   return Expanded(
+  //     child: Container(
+  //       alignment: Alignment.center,
+  //       child: Text("Cannot find any result with $email"),
+  //     ),
+  //   );
+  // }
 
   Widget _buildItemResult(BuildContext context) {
     User item = User(
