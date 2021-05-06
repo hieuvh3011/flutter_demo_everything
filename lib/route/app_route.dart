@@ -67,4 +67,8 @@ class AppRoute {
   static void setSplashScreenAsRoot(context) {
     Navigator.pushReplacementNamed(context, SPLASH_SCREEN);
   }
+
+  static void backToLogin() {
+    // Navigator.pushReplacementNamed(, routeName)
+  }
 }

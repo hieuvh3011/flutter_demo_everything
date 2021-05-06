@@ -1,5 +1,3 @@
-import 'package:show_off/model/app_response.dart';
-
 class AppResponseDataList {
   int status;
   String message;
@@ -18,7 +16,6 @@ class AppResponseDataList {
 
   @override
   String toString() {
-    // TODO: implement toString
     return "AppResponseDataList: status = $status, message = $message, data = $data";
   }
 }

@@ -77,30 +77,30 @@ class AccountScreen extends StatelessWidget {
     );
   }
 
-  _button(BuildContext context, Function onPressed, String text) {
-    return Container(
-      width: 45.0,
-      height: 45.0,
-      margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(Colors.lightBlue),
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-          ),
-        ),
-        child: Center(
-          child: Text(
-            text,
-            style: TextStyle(fontSize: 25.0, color: Colors.white),
-          ),
-        ),
-      ),
-    );
-  }
+  // _button(BuildContext context, Function onPressed, String text) {
+  //   return Container(
+  //     width: 45.0,
+  //     height: 45.0,
+  //     margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+  //     child: ElevatedButton(
+  //       onPressed: onPressed,
+  //       style: ButtonStyle(
+  //         backgroundColor: MaterialStateProperty.all<Color>(Colors.lightBlue),
+  //         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+  //           RoundedRectangleBorder(
+  //             borderRadius: BorderRadius.circular(10.0),
+  //           ),
+  //         ),
+  //       ),
+  //       child: Center(
+  //         child: Text(
+  //           text,
+  //           style: TextStyle(fontSize: 25.0, color: Colors.white),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   _buttonGoToOther(BuildContext context, String text, Function onPress) {
     return Container(

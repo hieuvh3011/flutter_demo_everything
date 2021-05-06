@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutter_statusbar_manager/flutter_statusbar_manager.dart';
 import 'package:show_off/route/app_route.dart';
+import 'package:show_off/route/route_services.dart';
 import 'package:show_off/screens/something_went_wrong/something_went_wrong_screen.dart';
 
 class MyApp extends StatelessWidget {
@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
               child: MaterialApp(
                 title: 'Flutter Demo',
                 routes: AppRoute.routes,
+                navigatorKey: RouteServices().navigatorKey,
                 builder: (BuildContext context, Widget child) {
                   return FlutterEasyLoading(child: child);
                 },

@@ -20,7 +20,6 @@ class _ListUserScreenState extends State<ListUserScreen>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     // friendList = _chatStore.get;
   }
@@ -105,10 +104,8 @@ class _ListUserScreenState extends State<ListUserScreen>
 
   @override
   void updateKeepAlive() {
-    // TODO: implement updateKeepAlive
   }
 
   @override
-  // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 }
