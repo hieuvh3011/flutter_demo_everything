@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class ChatUser {
   String id;
   String fullName;
@@ -54,7 +52,6 @@ class ChatUser {
 
   @override
   String toString() {
-    // TODO: implement toString
     return "ChatUser: id = $id, name = $fullName, email = $email, phone = $phone, contactList = $contactList";
   }
 }

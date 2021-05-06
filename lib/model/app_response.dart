@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class AppResponse {
   int status;
   String message;
@@ -18,7 +16,6 @@ class AppResponse {
 
   @override
   String toString() {
-    // TODO: implement toString
     return "AppResponse: status = $status, message = $message, data = $data";
   }
 }

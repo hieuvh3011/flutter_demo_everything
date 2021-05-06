@@ -105,6 +105,11 @@ class LoginStore extends ChangeNotifier {
     notifyListeners();
   }
 
+  deleteEmailAndPassword() {
+    emailController.text = "";
+    passwordController.text = "";
+  }
+
   Future<dynamic> loginWithServer(
       String email, String password, BuildContext context) async {
     try {
@@ -119,6 +124,7 @@ class LoginStore extends ChangeNotifier {
         if (appResponse.status == 0) {
           Map<String, dynamic> data = appResponse.data;
           storeUser(data);
+          deleteEmailAndPassword();
           Navigator.of(context).pushReplacementNamed(AppRoute.BOTTOM_TAB);
         } else {
           String errorMessage = appResponse.message;

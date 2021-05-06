@@ -77,7 +77,7 @@ class LocalDatabase {
   }
 
   Future<List<User>> getListUser() async {
-    List<Map<String, dynamic>> listUser = List<Map<String, dynamic>>();
+    List<Map<String, dynamic>> listUser = [];
     try {
       final Database database = await getDatabase();
       listUser = await database.query(tableName);
@@ -99,9 +99,9 @@ class LocalDatabase {
   }
 
   Future<bool> isTableUserEmpty() async {
-    List<User> listUser = List<User>();
+    List<User> listUser = [];
     listUser = await getListUser();
-    print('listEmpty = '+ listUser.isEmpty.toString());
+    print('listEmpty = ' + listUser.isEmpty.toString());
     return listUser.isEmpty;
   }
 }

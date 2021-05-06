@@ -26,7 +26,6 @@ class _BottomTabsState extends State<BottomTabs> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
